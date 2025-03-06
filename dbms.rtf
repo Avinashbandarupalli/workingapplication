@@ -1,0 +1,718 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.14393}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 week 3\par
+\par
+1)search in rotated array:\par
+def search(nums, target):\par
+    left, right = 0, len(nums) - 1\par
+    \par
+    while left <= right:\par
+        mid = (left + right) // 2\par
+        \par
+        if nums[mid] == target:\par
+            return mid\par
+        \par
+        # Check if left side is sorted\par
+        if nums[left] <= nums[mid]:\par
+            if nums[left] <= target < nums[mid]:\par
+                right = mid - 1  # Search left half\par
+            else:\par
+                left = mid + 1  # Search right half\par
+        else:\par
+            # Right side must be sorted\par
+            if nums[mid] < target <= nums[right]:\par
+                left = mid + 1  # Search right half\par
+            else:\par
+                right = mid - 1  # Search left half\par
+    \par
+    return -1  # Target not found\par
+\par
+# Input\par
+n = int(input())\par
+nums = [int(input()) for _ in range(n)]\par
+target = int(input())\par
+\par
+# Output\par
+print(search(nums, target))\par
+\par
+2)sum of digits using recursion:\par
+def sum_of_digits(n):\par
+    if n == 0:\par
+        return 0\par
+    return n % 10 + sum_of_digits(n // 10)\par
+n = int(input())\par
+print(sum_of_digits(n))\par
+\par
+3) sort integers by there last digit sorting:\par
+def sort_by_last_digit(arr):\par
+    # Sort the list based on the last digit and then by the value\par
+    return sorted(arr, key=lambda x: (x % 10, x))\par
+\par
+# Input: First, the number of elements in the list\par
+n = int(input())\par
+\par
+# Input: Then, the list of integers\par
+arr = [int(input()) for _ in range(n)]\par
+\par
+# Sort the list and print each number on a new line\par
+sorted_arr = sort_by_last_digit(arr)\par
+\par
+# Print the sorted list\par
+for num in sorted_arr:\par
+    print(num)\par
+\par
+4) find the local maximum element searching:\par
+def find_peak(arr):\par
+    n = len(arr)\par
+    \par
+    # Binary search to find a peak element\par
+    left, right = 0, n - 1\par
+    \par
+    while left <= right:\par
+        mid = (left + right) // 2\par
+        \par
+        # Check if mid is a peak\par
+        if (mid == 0 or arr[mid] >= arr[mid - 1]) and (mid == n - 1 or arr[mid] >= arr[mid + 1]):\par
+            return mid\par
+        elif mid > 0 and arr[mid - 1] > arr[mid]:\par
+            # Peak must be on the left side\par
+            right = mid - 1\par
+        else:\par
+            # Peak must be on the right side\par
+            left = mid + 1\par
+    \par
+    return -1  # This should never be hit because there is always a peak.\par
+\par
+# Input: First, the number of elements in the list\par
+n = int(input())\par
+\par
+# Input: Then, the list of integers\par
+arr = [int(input()) for _ in range(n)]\par
+\par
+# Find and print the index of a peak element\par
+peak_index = find_peak(arr)\par
+print(peak_index)\par
+\par
+5) sort strings by number of distinct characters sorting:\par
+def sort_strings_by_criteria(strings):\par
+    # Sort the list using a custom key\par
+    return sorted(strings, key=lambda s: (len(set(s)), len(s), s))\par
+\par
+# Input: First, the number of strings\par
+n = int(input())\par
+\par
+# Input: Then, the list of strings\par
+strings = [input().strip() for _ in range(n)]\par
+\par
+# Sort the strings using the custom sort function\par
+sorted_strings = sort_strings_by_criteria(strings)\par
+\par
+# Output: Print the sorted strings\par
+for string in sorted_strings:\par
+    print(string)\par
+\par
+6) Generate fibonacci numbers using recursion:\par
+def fibonacci(n: int) -> int:\par
+    # Base case: return 0 when n is 0, and return 1 when n is 1\par
+    if n == 0:\par
+        return 0\par
+    elif n == 1:\par
+        return 1\par
+    # Recursive case: return sum of the previous two Fibonacci numbers\par
+    else:\par
+        return fibonacci(n - 1) + fibonacci(n - 2)\par
+\par
+# Input reading\par
+n = int(input())\par
+\par
+# Output the n-th Fibonacci number\par
+print(fibonacci(n))\par
+\par
+7) remove repeating adjacent letters:\par
+def removeDuplicates(s: str) -> str:\par
+    stack = []  # Stack to keep track of characters\par
+\par
+    for char in s:\par
+        # If the stack is not empty and the top of the stack matches the current character, pop the stack\par
+        if stack and stack[-1] == char:\par
+            stack.pop()\par
+        else:\par
+            stack.append(char)\par
+\par
+    # The final result is the characters remaining in the stack\par
+    return ''.join(stack)\par
+\par
+# Input reading\par
+s = input()\par
+\par
+# Output the final string after removing duplicates\par
+print(removeDuplicates(s))\par
+\par
+8) find first unique character:\par
+def firstUniqChar(s: str) -> int:\par
+    # Create a dictionary to store the frequency of each character\par
+    freq = \{\}\par
+\par
+    # First pass: build the frequency map\par
+    for char in s:\par
+        if char in freq:\par
+            freq[char] += 1\par
+        else:\par
+            freq[char] = 1\par
+\par
+    # Second pass: find the first character with a frequency of 1\par
+    for i, char in enumerate(s):\par
+        if freq[char] == 1:\par
+            return i  # Return the index of the first non-repeating character\par
+\par
+    return -1  # Return -1 if no non-repeating character exists\par
+\par
+# Input reading\par
+s = input()\par
+\par
+# Output the index of the first non-repeating character\par
+print(firstUniqChar(s))\par
+\par
+9) Sort 2D Points by Distance from Origin \f1\endash  sorting:\par
+def sort_points(points):\par
+    # Sorting the points by their Manhattan distance, then by x, then by y\par
+    return sorted(points, key=lambda point: (abs(point[0]) + abs(point[1]), point[0], point[1]))\par
+\par
+# Input reading\par
+n = int(input())  # Number of points\par
+points = []\par
+\par
+for _ in range(n):\par
+    x, y = map(int, input().split())\par
+    points.append((x, y))\par
+\par
+# Sort the points\par
+sorted_points = sort_points(points)\par
+\par
+# Output the sorted points\par
+for point in sorted_points:\par
+    print(point[0], point[1])\par
+\par
+10) reverse a string using recursion:\par
+def reverse_string(s: str) -> str:\par
+    # Base case: if the string is empty or has one character, return it as is.\par
+    if len(s) == 0:\par
+        return s\par
+    else:\par
+        # Recursive case: reverse the rest of the string and add the first character at the end\par
+        return reverse_string(s[1:]) + s[0]\par
+\par
+# Input reading\par
+s = input()\par
+\par
+# Output the reversed string\par
+print(reverse_string(s))\par
+\par
+11) find the first missing positive integer:\par
+def firstMissingPositive(nums):\par
+    n = len(nums)\par
+    \par
+    # Step 1: Reorganize numbers such that each number is placed at its correct index\par
+    for i in range(n):\par
+        while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:\par
+            # Swap nums[i] with nums[nums[i] - 1]\par
+            nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]\par
+\par
+    # Step 2: Find the first index where nums[i] != i + 1\par
+    for i in range(n):\par
+        if nums[i] != i + 1:\par
+            return i + 1\par
+\par
+    # Step 3: If all numbers from 1 to n are present, return n + 1\par
+    return n + 1\par
+\par
+# Input reading\par
+n = int(input())  # Number of elements\par
+nums = [int(input()) for _ in range(n)]\par
+\par
+# Output the smallest missing positive integer\par
+print(firstMissingPositive(nums))\par
+\par
+12) blanket validator:\par
+def isValid(s: str) -> str:\par
+    stack = []\par
+    # Dictionary to match the closing brackets with the corresponding opening brackets\par
+    matching_brackets = \{')': '(', '\}': '\{', ']': '['\}\par
+    \par
+    # Iterate through each character in the string\par
+    for char in s:\par
+        if char in matching_brackets.values():\par
+            # If it's an opening bracket, push to stack\par
+            stack.append(char)\par
+        elif char in matching_brackets:\par
+            # If it's a closing bracket, check if stack is empty or top of stack doesn't match\par
+            if stack and stack[-1] == matching_brackets[char]:\par
+                stack.pop()  # Pop the matching opening bracket from the stack\par
+            else:\par
+                return "NO"\par
+    \par
+    # If stack is empty, all brackets were properly matched\par
+    return "YES" if not stack else "NO"\par
+\par
+# Input reading\par
+s = input()\par
+\par
+# Output the result of the validity check\par
+print(isValid(s))\par
+\par
+\par
+week 4\par
+\par
+Kth Largest Element in an Array\par
+import heapq\par
+\par
+def findKthLargest(nums, k):\par
+    # Create a min-heap with the first k elements of the array\par
+    min_heap = nums[:k]\par
+    heapq.heapify(min_heap)\par
+\par
+    # Iterate over the rest of the array\par
+    for num in nums[k:]:\par
+        if num > min_heap[0]:\par
+            # If the current number is larger than the smallest in the heap, replace it\par
+            heapq.heappushpop(min_heap, num)\par
+\par
+    # The root of the heap will be the kth largest element\par
+    return min_heap[0]\par
+\par
+# Input reading and function call\par
+n = int(input())  # Number of elements in the array\par
+nums = [int(input()) for _ in range(n)]  # Array elements\par
+k = int(input())  # The kth largest number to find\par
+\par
+# Output the result\par
+print(findKthLargest(nums, k))\par
+\par
+\par
+\par
+\par
+FizzBuzz\par
+\par
+def fizzBuzz(n):\par
+    result = []\par
+    for i in range(1, n + 1):\par
+        if i % 3 == 0 and i % 5 == 0:\par
+            result.append("FizzBuzz")\par
+        elif i % 3 == 0:\par
+            result.append("Fizz")\par
+        elif i % 5 == 0:\par
+            result.append("Buzz")\par
+        else:\par
+            result.append(str(i))\par
+    return result\par
+\par
+if _name_ == "_main_":\par
+    n = int(input())\par
+    output = fizzBuzz(n)\par
+    print(output)\par
+Sort Array in Wave Form\par
+\par
+def wave_sort(arr):\par
+    arr.sort()\par
+    for i in range(0, len(arr) - 1, 2):\par
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]\par
+    print(*arr,sep="\\n")\par
+\par
+n = int(input())\par
+arr = [int(input()) for _ in range(n)]\par
+wave_sort(arr)\par
+\par
+Intersection of Two Arrays\par
+def intersection(nums1, nums2):\par
+    return list(set(nums1) & set(nums2))\par
+\par
+if _name_ == "_main_":\par
+    n = int(input())\par
+    nums1 = [int(input()) for _ in range(n)]\par
+    \par
+    m = int(input())\par
+    nums2 = [int(input()) for _ in range(m)]\par
+    \par
+    result = intersection(nums1, nums2)\par
+    print(sorted(result))  # Sorting to maintain consistent output format\par
+\par
+Convert Integer to Excel Column Title\par
+\par
+def convertToTitle(columnNumber):\par
+    result = []\par
+    while columnNumber > 0:\par
+        columnNumber -= 1\par
+        result.append(chr(columnNumber % 26 + ord('A')))\par
+        columnNumber //= 26\par
+    return ''.join(result[::-1])\par
+\par
+if _name_ == "_main_":\par
+    columnNumber = int(input())\par
+    print(convertToTitle(columnNumber))\par
+\par
+\par
+Find the Middle of a Linked List\par
+class ListNode:\par
+    def _init_(self, val=0, next=None):\par
+        self.val = val\par
+        self.next = next\par
+\par
+def findMiddle(head):\par
+    slow = fast = head\par
+    while fast and fast.next:\par
+        slow = slow.next\par
+        fast = fast.next.next\par
+    return slow.val\par
+\par
+def createLinkedList(values):\par
+    if not values:\par
+        return None\par
+    head = ListNode(values[0])\par
+    current = head\par
+    for val in values[1:]:\par
+        current.next = ListNode(val)\par
+        current = current.next\par
+    return head\par
+\par
+if _name_ == "_main_":\par
+    values = list(map(int, input().split()))\par
+    head = createLinkedList(values)\par
+    print(findMiddle(head))\par
+\par
+Find the First Unique Character in a String\par
+def firstUniqChar(s):\par
+    \par
+    char_count = \{\}\par
+    \par
+    \par
+    for char in s:\par
+        if char in char_count:\par
+            char_count[char] += 1\par
+        else:\par
+            char_count[char] = 1\par
+    \par
+    \par
+    for i in range(len(s)):\par
+        if char_count[s[i]] == 1:\par
+            return i\par
+    \par
+    \par
+    return -1\par
+input_string = input().strip()  \par
+print(firstUniqChar(input_string))  \par
+\par
+\par
+ scrambled string\par
+\par
+def isScramble(s1, s2):\par
+   \par
+    memo = \{\}\par
+\par
+    \par
+    def helper(s1, s2):\par
+        \par
+        if (s1, s2) in memo:\par
+            return memo[(s1, s2)]\par
+\par
+       \par
+        if s1 == s2:\par
+            memo[(s1, s2)] = True\par
+            return True\par
+        \par
+        \par
+        if sorted(s1) != sorted(s2):\par
+            memo[(s1, s2)] = False\par
+            return False\par
+\par
+        \par
+        n = len(s1)\par
+        for i in range(1, n):\par
+           \par
+            if helper(s1[:i], s2[:i]) and helper(s1[i:], s2[i:]):\par
+                memo[(s1, s2)] = True\par
+                return True\par
+            \par
+            \par
+            if helper(s1[:i], s2[-i:]) and helper(s1[i:], s2[:-i]):\par
+                memo[(s1, s2)] = True\par
+                return True\par
+\par
+        \par
+        memo[(s1, s2)] = False\par
+        return False\par
+\par
+    return helper(s1, s2)\par
+\par
+s1 = input().strip()  \par
+s2 = input().strip()  \par
+\par
+\par
+print(isScramble(s1, s2))\par
+\par
+Wiggle Sort\par
+#include <stdio.h>\par
+\par
+\par
+void wiggleSort(int nums[], int n) \{\par
+    for (int i = 1; i < n; i++) \{\par
+        if ((i % 2 == 1 && nums[i] < nums[i - 1]) ||  \par
+            (i % 2 == 0 && nums[i] > nums[i - 1])) \{  \par
+            int temp = nums[i];\par
+            nums[i] = nums[i - 1];\par
+            nums[i - 1] = temp;\par
+        \}\par
+    \}\par
+\}\par
+\par
+\par
+int main() \{\par
+    int n;\par
+    scanf("%d", &n);  \par
+\par
+    int nums[n];\par
+    for (int i = 0; i < n; i++) \{\par
+        scanf("%d", &nums[i]);  \par
+    \}\par
+\par
+    wiggleSort(nums, n);  \par
+\par
+    \par
+    for (int i = 0; i < n; i++) \{\par
+        printf("%d ", nums[i]);\par
+    \}\par
+    printf("\\n");\par
+\par
+    return 0;\par
+\}\par
+\par
+Count Inversions in an Array\par
+\par
+def merge_count_split_inv(arr, temp_arr, left, right):\par
+    if left == right:\par
+        return 0\par
+    \par
+    mid = (left + right) // 2\par
+    inv_count = merge_count_split_inv(arr, temp_arr, left, mid)\par
+    inv_count += merge_count_split_inv(arr, temp_arr, mid + 1, right)\par
+    inv_count += merge_and_count(arr, temp_arr, left, mid, right)\par
+    \par
+    return inv_count\par
+\par
+def merge_and_count(arr, temp_arr, left, mid, right):\par
+    i = left    # Starting index for left subarray\par
+    j = mid + 1 # Starting index for right subarray\par
+    k = left    # Starting index to be sorted\par
+    inv_count = 0\par
+    \par
+    while i <= mid and j <= right:\par
+        if arr[i] <= arr[j]:\par
+            temp_arr[k] = arr[i]\par
+            i += 1\par
+        else:\par
+            temp_arr[k] = arr[j]\par
+            inv_count += (mid - i + 1)\par
+            j += 1\par
+        k += 1\par
+    \par
+    while i <= mid:\par
+        temp_arr[k] = arr[i]\par
+        i += 1\par
+        k += 1\par
+    \par
+    while j <= right:\par
+        temp_arr[k] = arr[j]\par
+        j += 1\par
+        k += 1\par
+    \par
+    for i in range(left, right + 1):\par
+        arr[i] = temp_arr[i]\par
+    \par
+    return inv_count\par
+\par
+def count_inversions(arr):\par
+    n = len(arr)\par
+    temp_arr = [0] * n\par
+    return merge_count_split_inv(arr, temp_arr, 0, n - 1)\par
+\par
+# Input reading\par
+n = int(input())  # Read the number of elements\par
+arr = [int(input()) for _ in range(n)]  # Read the array elements\par
+\par
+# Output the number of inversions\par
+print(count_inversions(arr))\par
+\par
+Two Sum \endash  Hash map\par
+#include <stdio.h>\par
+#include <stdlib.h>\par
+\par
+// Structure for hash table entries\par
+typedef struct \{\par
+    int value;\par
+    int index;\par
+\} HashEntry;\par
+\par
+// Simple hash function\par
+int hashFunction(int key, int size) \{\par
+    return abs(key) % size;\par
+\}\par
+\par
+// Function to find two sum using hash map\par
+void twoSum(int nums[], int n, int target) \{\par
+    int hashSize = n * 2;  // Increase size to reduce collisions\par
+    HashEntry* hashTable = (HashEntry*)calloc(hashSize, sizeof(HashEntry));\par
+    \par
+    for (int i = 0; i < n; i++) \{\par
+        int complement = target - nums[i];\par
+        int hashIndex = hashFunction(complement, hashSize);\par
+        \par
+        if (hashTable[hashIndex].value == complement) \{\par
+            printf("%d %d\\n", hashTable[hashIndex].index, i);\par
+            free(hashTable);\par
+            return;\par
+        \}\par
+\par
+        hashIndex = hashFunction(nums[i], hashSize);\par
+        hashTable[hashIndex].value = nums[i];\par
+        hashTable[hashIndex].index = i;\par
+    \}\par
+\par
+    free(hashTable);\par
+    printf("-1 -1\\n");  // No valid pair found (shouldn't happen based on constraints)\par
+\}\par
+\par
+int main() \{\par
+    int n;\par
+    scanf("%d", &n);\par
+    \par
+    int* nums = (int*)malloc(n * sizeof(int));\par
+    for (int i = 0; i < n; i++) \{\par
+        scanf("%d", &nums[i]);\par
+    \}\par
+\par
+    int target;\par
+    scanf("%d", &target);\par
+\par
+    twoSum(nums, n, target);\par
+\par
+    free(nums);\par
+    return 0;\par
+\} \par
+\par
+Two Sum \endash  Hash map\par
+import java.util.HashMap;\par
+import java.util.Scanner;\par
+\par
+public class TwoSum \{\par
+   \par
+    \par
+    public static int[] twoSum(int[] nums, int target) \{\par
+        \par
+        HashMap<Integer, Integer> map = new HashMap<>();\par
+        \par
+        \par
+        for (int i = 0; i < nums.length; i++) \{\par
+            int complement = target - nums[i];\par
+            \par
+            \par
+            if (map.containsKey(complement)) \{\par
+                return new int[] \{ map.get(complement), i \};\par
+            \}\par
+            \par
+            \par
+            map.put(nums[i], i);\par
+        \}\par
+        \par
+        \par
+        return new int[] \{\};\par
+    \}\par
+\par
+    public static void main(String[] args) \{\par
+        \par
+        Scanner scanner = new Scanner(System.in);\par
+        \par
+        \par
+        int n = scanner.nextInt();\par
+        \par
+        \par
+        int[] nums = new int[n];\par
+        \par
+        for (int i = 0; i < n; i++) \{\par
+            nums[i] = scanner.nextInt();\par
+        \}\par
+        \par
+        \par
+        int target = scanner.nextInt();\par
+        \par
+        \par
+        int[] result = twoSum(nums, target);\par
+        \par
+        \par
+        if (result.length > 0) \{\par
+            System.out.println(result[0] + " " + result[1]);\par
+        \} else \{\par
+            System.out.println("No solution");\par
+        \}\par
+        \par
+        scanner.close();\par
+    \}\par
+\}\par
+Delete a Node in a Doubly Linked List\par
+class ListNode:\par
+    def _init_(self, val=0, prev=None, next=None):\par
+        self.val = val\par
+        self.prev = prev\par
+        self.next = next\par
+\par
+def deleteNode(head, node_val):\par
+    if not head:\par
+        return None  # Return if the list is empty\par
+\par
+    current = head\par
+    while current:\par
+        if current.val == node_val:\par
+            # Case 1: Deleting the head node\par
+            if current == head:\par
+                head = head.next\par
+                if head:\par
+                    head.prev = None\par
+                return head\par
+            \par
+            # Case 2: Deleting a middle or last node\par
+            if current.next:\par
+                current.next.prev = current.prev\par
+            if current.prev:\par
+                current.prev.next = current.next\par
+            return head  # Return the updated head\par
+        \par
+        current = current.next\par
+\par
+    return head  # Return the head if node_val was not found\par
+\par
+def printList(head):\par
+    result = []\par
+    current = head\par
+    while current:\par
+        result.append(current.val)\par
+        current = current.next\par
+    print(result)\par
+\par
+def createDoublyLinkedList(values):\par
+    if not values:\par
+        return None\par
+    head = ListNode(values[0])\par
+    current = head\par
+    for val in values[1:]:\par
+        new_node = ListNode(val)\par
+        current.next = new_node\par
+        new_node.prev = current\par
+        current = new_node\par
+    return head\par
+\par
+if _name_ == "_main_":\par
+    values = list(map(int, input().split()))\par
+    node_val = int(input())\par
+    head = createDoublyLinkedList(values)\par
+    modified_head = deleteNode(head, node_val)\par
+    printList(modified_head)\f0\par
+}
+ 
