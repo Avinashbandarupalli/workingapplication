@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .video-container {
+            margin-top: 20px;
+        }
+        video {
+            width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click a Link to Play a Video</h1>
+
+    <!-- Links to trigger video playback -->
+    <div>
+        <a href="https://www.vecteezy.com/free-videos/nature" onclick="playVideo('video1.mp4')">Nature</a>
+    </div>
+    <div>
+        <a href="https://www.vecteezy.com/free-videos/flowers" onclick="playVideo('video2.mp4')">Flowers</a>
+    </div>
+    <div>
+        <a href="https://www.vecteezy.com/free-videos/food" onclick="playVideo('video3.mp4')">Food</a>
+    </div>
+
+    <!-- Video container -->
+    <div class="video-container">
+        <video id="videoPlayer" controls>
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // Function to play a video when a link is clicked
+        function playVideo(videoFile) {
+            var videoPlayer = document.getElementById("videoPlayer");
+            videoPlayer.src = videoFile;
+            videoPlayer.play();
+        }
+    </script>
+
+</body>
+</html>
