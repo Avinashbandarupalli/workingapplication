@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Click the QR Code</h1>
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        // Generate QR code linking to templates.html
+        let qrCode = new QRCode(document.getElementById("qrcode"), {
+            text: window.location.origin + "/templates",
+            width: 200,
+            height: 200
+        });
+
+        // Make QR code clickable
+        document.getElementById("qrcode").addEventListener("click", function () {
+            window.location.href = "/templates";
+        });
+    </script>
+</body>
+</html>

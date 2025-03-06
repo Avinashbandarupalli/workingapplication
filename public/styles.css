@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #000000; /* Pure black background for contrast */
+    margin: 0;
+    padding: 20px;
+    color: #e0e0e0; /* Light gray for readability */
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #121212; /* Slightly lighter black */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Teal neon glow */
+}
+
+h1 {
+    color: #00ffe0; /* Neon teal */
+    text-shadow: 0 0 10px #00ffe0, 0 0 20px #8bffec, 0 0 30px #00ffe0;
+}
+
+h2 {
+    color: #ffffff; /* Neon purple */
+    text-shadow: 0 0 10px #a084f7, 0 0 20px #d2bfff, 0 0 30px #a084f7;
+    margin-top: 20px;
+}
+
+.template-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.template-grid img {
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 2px solid transparent;
+    position: relative; /* For sparkles effect */
+}
+
+.template-grid img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00ffe0, 0 0 40px #00bcd4, 0 0 60px #00bcd4; /* Teal neon glow */
+    border: 2px solid #00ffe0;
+    animation: pulse 1.2s infinite, sparkles 2s infinite;
+}
+
+/* Keyframes for pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px #00ffe0, 0 0 40px #00bcd4, 0 0 60px #00bcd4;
+    }
+    50% {
+        box-shadow: 0 0 30px #00ffe0, 0 0 50px #00bcd4, 0 0 70px #00bcd4;
+    }
+}
+
+/* Keyframes for sparkles effect */
+@keyframes sparkles {
+    0%, 100% {
+        background: radial-gradient(circle, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0) 50%);
+        opacity: 0.8;
+    }
+    50% {
+        background: radial-gradient(circle, rgba(255,255,255,0.7) 20%, rgba(255,255,255,0) 60%);
+        opacity: 1;
+    }
+}
+
+.template-grid img:hover::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 220px;
+    height: 270px;
+    background: transparent;
+    animation: sparkles 2s infinite;
+    pointer-events: none; /* Makes sparkles non-interactive */
+    z-index: -1; /* Sends sparkles behind the image */
+}
